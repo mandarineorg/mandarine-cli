@@ -23,7 +23,7 @@ export class Commands {
                 flag: "directory",
                 alias: "d",
                 description: "Defines directory where application will be created. Default is current working directory",
-                required: true
+                required: false
             })
             .option({
                 flag: "force",

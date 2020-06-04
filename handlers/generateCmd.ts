@@ -13,9 +13,7 @@ Please specify a type to generate:
 --middleware
 --repository
 --model
---configuration
-
-mdrn --generate [NAME] [TYPES]`;
+--configuration`;
 
 export const GenerateCmd = (cmd: CommandMetadata, command: object, options: object) => {
 
@@ -23,14 +21,14 @@ export const GenerateCmd = (cmd: CommandMetadata, command: object, options: obje
     CommandUtils.verifyValidityOptions(cmd, options);
 
     let moduleName = undefined;
-    
+
     if(command[cmd.alias] != undefined) {
         moduleName = command[cmd.alias];
     } else if(command[cmd.command] != undefined) {
         moduleName = command[cmd.command];
     }
-    
-    if(!(moduleName instanceof String) || moduleName == undefined) {
+
+    if(!(typeof moduleName === 'string') || moduleName == undefined) {
         console.log(`
         Bad syntax:
 
@@ -40,7 +38,13 @@ export const GenerateCmd = (cmd: CommandMetadata, command: object, options: obje
     }
 
     let optionKeys = Object.keys(options);
-    if(options == undefined || optionKeys.length == 0) throw typeErrorMsg;
+    if(options == undefined || optionKeys.length == 0) {
+        console.log(typeErrorMsg);
+        console.log("");
+        console.log(cmd.usage);
+        console.log("");
+        return;
+    }
 
     let moduleFolder = `/src/main/mandarine/${moduleName}`;
     let toGenerate: object = {

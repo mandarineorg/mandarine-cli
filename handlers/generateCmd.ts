@@ -13,7 +13,9 @@ Please specify a type to generate:
 --middleware
 --repository
 --model
---configuration`;
+--configuration
+
+mdrn --generate [NAME] [TYPES]`;
 
 const badSyntax = `
 Bad generation syntax:
@@ -33,7 +35,7 @@ export const GenerateCmd = (cmd: CommandMetadata, command: object, options: obje
         moduleName = command[cmd.command];
     }
     
-    if(moduleName instanceof String || moduleName == undefined) throw badSyntax;
+    if(!(moduleName instanceof String) || moduleName == undefined) throw badSyntax;
 
     let optionKeys = Object.keys(options);
     if(options == undefined || optionKeys.length == 0) throw typeErrorMsg;

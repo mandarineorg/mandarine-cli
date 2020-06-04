@@ -12,7 +12,15 @@ export class CommandUtils {
             let byAlias = option.alias in contextOptions;
 
             if(option.required && (!byFlag && !byAlias)) {
-                throw new Error(`Option --${option.flag} (-${option.alias}) is required`);
+                throw `Option --${option.flag} (-${option.alias}) is required`;
+            }
+        });
+    }
+
+    public static verifyValidityOptions(options: Array<OptionsMetadata>, contextOptions: object) {
+        Object.keys(contextOptions).forEach((cmdOptionKey) => {
+            if(!options.some(option => option.alias == cmdOptionKey || option.flag == cmdOptionKey)) {
+                throw `Found argument ${cmdOptionKey} which wasn't expected, or isn't valid in this context`;
             }
         });
     }

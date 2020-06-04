@@ -5,7 +5,6 @@ const { args } = Deno;
 const parsedArgs = parse(args);
 const commands = new Commands();
 
-
 async function Process(): Promise<void> {
 
     const data: Args = parsedArgs;

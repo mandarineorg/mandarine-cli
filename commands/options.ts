@@ -1,6 +1,7 @@
 import { CommandMetadata } from "./commandMetadata.ts";
 import { CommandFactory } from "./commandFactory.ts";
 import { NewCmd } from "../handlers/newCmd.ts";
+import { GenerateCmd } from "../handlers/generateCmd.ts";
 
 export class Commands {
 
@@ -43,6 +44,7 @@ export class Commands {
             .command("generate")
             .alias("g")
             .description("Creates modules for a mandarine-powered application")
+            .handler(GenerateCmd)
             .option({
                 flag: "controller",
                 alias: "c",
@@ -57,7 +59,6 @@ export class Commands {
             })
             .option({
                 flag: "component",
-                alias: "com",
                 description: "Creates a regular component for module",
                 required: false
             })
@@ -75,8 +76,12 @@ export class Commands {
             })
             .option({
                 flag: "model",
-                alias: "dbm",
                 description: "Creates a database model for module",
+                required: false
+            })
+            .option({
+                flag: "configuration",
+                description: "Creates a configuran component for module",
                 required: false
             })
             .get()

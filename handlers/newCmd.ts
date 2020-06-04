@@ -5,6 +5,8 @@ import { structure as MandarineProjectStructure } from "https://deno.land/x/mand
 export const NewCmd = (cmd: CommandMetadata, command: object, options: object) => {
     // @ts-ignore
     CommandUtils.verifyRequiredOptions(cmd.options, options);
+    // @ts-ignore
+    CommandUtils.verifyValidityOptions(cmd.options, options);
     let cwd = Deno.cwd();
 
     //@ts-ignore

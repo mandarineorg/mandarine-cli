@@ -35,8 +35,8 @@ In order to install Mandarine's CLI, you need to have installed Deno in your com
 * `run`: Compiles & Run the mandarine application located in the current working directory.
     * `mandarine run [OPTIONS]`
         * [OPTIONS]
-            * `--entry-point`: Defines where Mandarine's entry point file is located. Default: ${Deno.cwd()}/src/main/mandarine/app.ts
-            * `--tsconfig`: Specifies the route of tsconfig.json to be used. Default: ${Deno.cwd()}/tsconfig.json
+            * `--entry-point`: Defines where Mandarine's entry point file is located. Default: `${Deno.cwd()}/src/main/mandarine/app.ts`
+            * `--tsconfig`: Specifies the route of tsconfig.json to be used. Default: `${Deno.cwd()}/tsconfig.json`
             * `--allow-write`: Specifies `deno` should use the flag --allow-write
             * `--allow-read`: Specifies `deno` should use the flag --allow-read
             * `--allow-run`: Specifies `deno` should use the flag --allow-run

@@ -1,6 +1,7 @@
 import { OptionsMetadata } from "../commands/options/optionsMetadata.ts";
 import { Args } from "https://deno.land/std/flags/mod.ts";
 import { CommandMetadata } from "../commands/commandMetadata.ts";
+import { bold } from "https://deno.land/std/fmt/colors.ts";
 
 export class CommandUtils {
     public static verifyRequiredOptions(cmd: CommandMetadata, contextOptions: object) {
@@ -25,7 +26,7 @@ export class CommandUtils {
         Object.keys(contextOptions).forEach((cmdOptionKey) => {
             //@ts-ignore
             if(!cmd.options.some(option => option.alias == cmdOptionKey || option.flag == cmdOptionKey)) {
-                throw `Found argument ${cmdOptionKey} which wasn't expected, or isn't valid in this context
+                throw `Found argument ${bold(cmdOptionKey)} which wasn't expected, or isn't valid in this context
                 
                 ${cmd.usage}`;
             }

@@ -3,6 +3,7 @@ import { CommandFactory } from "./commandFactory.ts";
 import { NewCmd } from "../handlers/newCmd.ts";
 import { GenerateCmd } from "../handlers/generateCmd.ts";
 import { cliVersion } from "../version.ts";
+import { RunCmd } from "../handlers/runCmd.ts";
 
 export class Commands {
 
@@ -11,6 +12,7 @@ export class Commands {
     constructor() {
         this.initializeNewCmd();
         this.initializeGenerateCmd();
+        this.initializeRunCmd();
     }
 
     private initializeNewCmd() {
@@ -85,6 +87,49 @@ export class Commands {
             .option({
                 flag: "configuration",
                 description: "Creates a configuran component for module",
+                required: false
+            })
+            .get()
+        );
+    }
+
+    private initializeRunCmd() {
+        this.commands.push(
+            CommandFactory
+            .new()
+            .command("run")
+            .alias("r")
+            .description("Run the mandarine-powered application located in the current working directory")
+            .usage("mandarine run [OPTIONS]")
+            .handler(RunCmd)
+            .option({
+                flag: "entry-point",
+                description: "Defines the route of the mandarine-powered application. Default: ${Deno.cwd()}/src/main/mandarine/app.ts",
+                required: false
+            })
+            .option({
+                flag: "tsconfig",
+                description: "Specifies the route of tsconfig.json to be used",
+                required: false
+            })
+            .option({
+                flag: "allow-write",
+                description: "Specifies `deno` should use the flag --allow-write",
+                required: false
+            })
+            .option({
+                flag: "allow-read",
+                description: "Specifies `deno` should use the flag --allow-read",
+                required: false
+            })
+            .option({
+                flag: "allow-run",
+                description: "Specifies `deno` should use the flag --allow-run",
+                required: false
+            })
+            .option({
+                flag: "reload",
+                description: "Specifies `deno` should use the flag --reload",
                 required: false
             })
             .get()

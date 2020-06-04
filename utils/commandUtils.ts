@@ -24,7 +24,7 @@ export class CommandUtils {
     public static verifyValidityOptions(cmd: CommandMetadata, contextOptions: object) {
         Object.keys(contextOptions).forEach((cmdOptionKey) => {
             //@ts-ignore
-            if(!options.some(option => option.alias == cmdOptionKey || option.flag == cmdOptionKey)) {
+            if(!cmd.options.some(option => option.alias == cmdOptionKey || option.flag == cmdOptionKey)) {
                 throw `Found argument ${cmdOptionKey} which wasn't expected, or isn't valid in this context
                 
                 ${cmd.usage}`;

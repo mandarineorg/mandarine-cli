@@ -19,12 +19,12 @@ export class %componentName% {
 }
 `;
 
-export const middlewareFile = `import { Middleware, MiddlewareTarget } from "https://deno.land/x/mandarinets/mod.ts";
+export const middlewareFile = `import { Middleware, MiddlewareTarget, ResponseParam, RequestParam } from "https://deno.land/x/mandarinets/mod.ts";
 
 @Middleware(new RegExp('/'))
 export class %middlewareName% implements MiddlewareTarget {
 
-    public onPreRequest(@ResponseParam() response: any): boolean {
+    public onPreRequest(@RequestParam() request: any, @ResponseParam() response: any): boolean {
         /**
          * True = the request must continue, 
          * False = the request will stop 

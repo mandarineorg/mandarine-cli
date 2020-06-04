@@ -6,9 +6,9 @@ import { green, bold } from "https://deno.land/std/fmt/colors.ts";
 
 export const NewCmd = (cmd: CommandMetadata, command: object, options: object) => {
     // @ts-ignore
-    CommandUtils.verifyRequiredOptions(cmd.options, options);
+    CommandUtils.verifyRequiredOptions(cmd, options);
     // @ts-ignore
-    CommandUtils.verifyValidityOptions(cmd.options, options);
+    CommandUtils.verifyValidityOptions(cmd, options);
     let cwd = Deno.cwd();
     let force = false;
 

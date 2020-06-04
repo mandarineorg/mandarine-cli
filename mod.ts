@@ -2,14 +2,12 @@ import { parse, Args } from "https://deno.land/std/flags/mod.ts";
 import { Commands } from "./commands/commands.ts";
 import { bold } from "https://deno.land/std/fmt/colors.ts";
 
+export async function Process(): Promise<void> {
 
-const { args } = Deno;
-const parsedArgs = parse(args);
-const commands = new Commands();
+    const { args } = Deno;
+    const data = parse(args);
+    const commands = new Commands();
 
-async function Process(): Promise<void> {
-
-    const data: Args = parsedArgs;
     const existingCommands = commands.getCommands();
 
     let currentCommandName = data["_"][0];

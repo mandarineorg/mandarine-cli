@@ -1,5 +1,5 @@
 import { parse, Args } from "https://deno.land/std/flags/mod.ts";
-import { Commands } from "./commands/options.ts";
+import { Commands } from "./commands/commands.ts";
 
 const { args } = Deno;
 const parsedArgs = parse(args);
@@ -10,7 +10,7 @@ async function Process(): Promise<void> {
     const data: Args = parsedArgs;
     const existingCommands = commands.getCommands();
 
-    let currentCommandName = Object.keys(data)[1];
+    let currentCommandName = data["_"][0];
 
     let command = {
         [currentCommandName]: data[currentCommandName]
@@ -18,9 +18,8 @@ async function Process(): Promise<void> {
 
 
     let options = Object.assign({}, data);
-    delete options[Object.keys(options)[1]];
     delete options["_"];
-
+    
     for(let i = 0; i<existingCommands.length; i++) {
         let cmd = existingCommands[i];
 

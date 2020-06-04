@@ -3,7 +3,7 @@ import { CommandMetadata } from "../commands/commandMetadata.ts";
 import { CommandUtils } from "../utils/commandUtils.ts";
 import { controllerFile, serviceFile, componentFile, middlewareFile, repositoryFile, modelFile, configurationFile } from "../defaults/defaultFiles.ts";
 import { CommonUtils } from "../utils/commonUtils.ts";
-
+import { bold, green } from "https://deno.land/std/fmt/colors.ts";
 const typeErrorMsg = `
 Please specify a type to generate:
 
@@ -97,7 +97,7 @@ export const GenerateCmd = (cmd: CommandMetadata, command: object, options: obje
         let filePath = `${Deno.cwd()}${moduleFolder}/${file}`;
 
         if(CommonUtils.fileDirExists(filePath)) { 
-            console.log(`${file} exists in Module, skipping.`);
+            console.log(`${bold(file)} exists in Module, skipping.`);
             return;
         };
 
@@ -105,4 +105,5 @@ export const GenerateCmd = (cmd: CommandMetadata, command: object, options: obje
         Deno.writeFileSync(filePath, writeableContent);
     });
     
+    console.log(`Module created ${green('successfully')}`);
 }

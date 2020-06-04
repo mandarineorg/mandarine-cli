@@ -30,6 +30,11 @@ export class CommandFactory {
         return this;
     }
 
+    public usage(usage: string): CommandFactory {
+        this.optionMetadata.usage = usage;
+        return this;
+    }
+    
     public option(optionMetadata: OptionsMetadata): CommandFactory {
         // @ts-ignore
         if(this.optionMetadata.options == (null || undefined)) this.optionMetadata.options = new Array<any>();

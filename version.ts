@@ -1,0 +1,1 @@
+export const cliVersion = "1.0.0";

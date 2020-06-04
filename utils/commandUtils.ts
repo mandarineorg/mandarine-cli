@@ -1,9 +1,11 @@
 import { OptionsMetadata } from "../commands/options/optionsMetadata.ts";
 import { Args } from "https://deno.land/std/flags/mod.ts";
+import { CommandMetadata } from "../commands/commandMetadata.ts";
 
 export class CommandUtils {
-    public static verifyRequiredOptions(options: Array<OptionsMetadata>, contextOptions: object) {
-        options.forEach((option) => {
+    public static verifyRequiredOptions(cmd: CommandMetadata, contextOptions: object) {
+        //@ts-ignore
+        cmd.options.forEach((option) => {
             if(option.required == undefined) option.required = false;
 
             let byFlag = option.flag in contextOptions;
@@ -12,15 +14,20 @@ export class CommandUtils {
             let byAlias = option.alias in contextOptions;
 
             if(option.required && (!byFlag && !byAlias)) {
-                throw `Option --${option.flag} (-${option.alias}) is required`;
+                throw `Option --${option.flag} (-${option.alias}) is required
+                
+                ${cmd.usage}`;
             }
         });
     }
 
-    public static verifyValidityOptions(options: Array<OptionsMetadata>, contextOptions: object) {
+    public static verifyValidityOptions(cmd: CommandMetadata, contextOptions: object) {
         Object.keys(contextOptions).forEach((cmdOptionKey) => {
+            //@ts-ignore
             if(!options.some(option => option.alias == cmdOptionKey || option.flag == cmdOptionKey)) {
-                throw `Found argument ${cmdOptionKey} which wasn't expected, or isn't valid in this context`;
+                throw `Found argument ${cmdOptionKey} which wasn't expected, or isn't valid in this context
+                
+                ${cmd.usage}`;
             }
         });
     }

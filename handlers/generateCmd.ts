@@ -17,15 +17,10 @@ Please specify a type to generate:
 
 mdrn --generate [NAME] [TYPES]`;
 
-const badSyntax = `
-Bad generation syntax:
-
-mdrn --generate [NAME] [TYPES]`;
-
 export const GenerateCmd = (cmd: CommandMetadata, command: object, options: object) => {
 
-    CommandUtils.verifyRequiredOptions(cmd.options, options);
-    CommandUtils.verifyValidityOptions(cmd.options, options);
+    CommandUtils.verifyRequiredOptions(cmd, options);
+    CommandUtils.verifyValidityOptions(cmd, options);
 
     let moduleName = undefined;
     
@@ -35,7 +30,14 @@ export const GenerateCmd = (cmd: CommandMetadata, command: object, options: obje
         moduleName = command[cmd.command];
     }
     
-    if(!(moduleName instanceof String) || moduleName == undefined) throw badSyntax;
+    if(!(moduleName instanceof String) || moduleName == undefined) {
+        console.log(`
+        Bad syntax:
+
+        ${cmd.usage}
+        `);
+        return;
+    }
 
     let optionKeys = Object.keys(options);
     if(options == undefined || optionKeys.length == 0) throw typeErrorMsg;

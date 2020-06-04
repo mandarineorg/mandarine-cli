@@ -50,5 +50,5 @@ export const NewCmd = (cmd: CommandMetadata, command: object, options: object) =
         Deno.writeFileSync(fullPath, writeableContent);
     });
 
-    console.log(`Project created ${green('successfully')}`);
+    console.log(`Mandarine-powered project created ${green('successfully')}`);
 }

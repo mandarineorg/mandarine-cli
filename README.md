@@ -8,7 +8,7 @@ In order to install the latest version of Mandarine's CLI, you need to have inst
 # Usage
 Please [click here](https://mandarineframework.gitbook.io/mandarine-ts/mandarine-cli/cli) for documentation.
 
-## Want to help?
+# Want to help?
 ### Interested in coding
 In order to submit improvements to the code, open a PR and wait for it to review. We appreciate you doing this.
 ### Not interested in coding

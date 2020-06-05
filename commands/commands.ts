@@ -109,7 +109,7 @@ export class Commands {
             })
             .option({
                 flag: "tsconfig",
-                description: "Specifies the route of tsconfig.json to be used",
+                description: "Specifies the route of tsconfig.json to be used. Default: ${Deno.cwd()}/tsconfig.json",
                 required: false
             })
             .option({

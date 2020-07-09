@@ -1,15 +1,13 @@
-import {
-    structure as MandarineProjectStructure
-} from "https://deno.land/x/mandarinets/mandarine-project-structure.ts";
-import { CommandMetadata } from "../commands/types/types_command.ts";
-import { green, bold } from "https://deno.land/std/fmt/colors.ts";
+import { CommandMetadata, objectGen } from "../types/types.ts";
 import { CommandUtils } from "../utils/commandUtils.ts";
+import { MandarineProjectStructure } from "../deps.ts";
 import { CommonUtils } from "../utils/commonUtils.ts";
+import { green, bold } from "../deps.ts";
 
 export const NewCmd = (
   cmd: CommandMetadata,
-  command: object,
-  options: object
+  command: objectGen,
+  options: objectGen
 ) => {
 
   CommandUtils.verifyRequiredOptions(cmd, options);
@@ -18,12 +16,12 @@ export const NewCmd = (
   let cwd = Deno.cwd();
   let force = false;
 
-  //@ts-ignore
+
   if (options["directory"]) cwd = options["directory"];
-  //@ts-ignore
+
   if (options["d"]) cwd = options["d"];
 
-  //@ts-ignore
+
   if (options["force"] || options["f"]) force = true;
 
   MandarineProjectStructure.folders.forEach((folder) => {
@@ -31,7 +29,7 @@ export const NewCmd = (
     try {
       Deno.mkdirSync(fullPath);
     } catch (error) {
-      // We skip if the folder already exists because we do not want to overwrite folders.
+      // * We skip if the folder already exists because we do not want to overwrite folders.
     }
   });
 

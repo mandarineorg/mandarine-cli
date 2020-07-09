@@ -1,9 +1,9 @@
 import { green, yellow } from "https://deno.land/std/fmt/colors.ts"
-import { CommandMetadata } from "./types/types_command.ts";
 import { GenerateCmd } from "../handlers/generateCmd.ts";
 import { CommandFactory } from "./commandFactory.ts";
-import { RunCmd } from "../handlers/runCmd.ts";
+import { CommandMetadata } from "../types/types.ts";
 import { NewCmd } from "../handlers/newCmd.ts";
+import { RunCmd } from "../handlers/runCmd.ts";
 import { cliVersion } from "../version.ts";
 
 export class Commands {
@@ -163,9 +163,9 @@ export class Commands {
 
     console.log(helpInfo);
 
-    for (const command of this.commands) {
+    for (const { alias, command, description } of this.commands) {
       console.log(
-        `${yellow(command.command)} (${command.alias})    ${command.description}.`
+        `${yellow(command)} (${alias})    ${description}.`
       );
     }
     console.log("\n");

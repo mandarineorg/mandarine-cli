@@ -1,12 +1,10 @@
-import { CommandMetadata } from "./types/types_command.ts";
-import { OptionsMetadata } from "./types/type_options.ts";
+import { CommandMetadata, OptionsMetadata } from "../types/types.ts";
 
 export class CommandFactory {
-
   // @ts-ignore
   private optionMetadata: CommandMetadata = {};
 
-  public static new () {
+  public static new() {
     return new CommandFactory();
   }
 
@@ -36,9 +34,8 @@ export class CommandFactory {
   }
 
   public option(optionMetadata: OptionsMetadata): CommandFactory {
-
-    if (!this.optionMetadata.options){
-        this.optionMetadata.options = new Array<any>();
+    if (!this.optionMetadata.options) {
+      this.optionMetadata.options = [];
     }
 
     this.optionMetadata.options?.push(optionMetadata);

@@ -26,12 +26,12 @@ export class %middlewareName% implements MiddlewareTarget {
 
     public onPreRequest(@RequestParam() request: any, @ResponseParam() response: any): boolean {
         /**
-         * True = the request must continue, 
-         * False = the request will stop 
+         * True = the request must continue,
+         * False = the request will stop
          */
         return true;
     }
-    
+
     public onPostRequest(): void {
     }
 
@@ -46,7 +46,7 @@ export abstract class %repositoryName% extends MandarineRepository<YourModel> {
     constructor() {
         super(YourModel);
     }
-    
+
 }
 `;
 

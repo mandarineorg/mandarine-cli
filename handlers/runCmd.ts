@@ -1,6 +1,7 @@
-import { CommandMetadata } from "../commands/commandMetadata.ts";
+import { CommandMetadata } from "../commands/types/types_command.ts";
 import { CommandUtils } from "../utils/commandUtils.ts";
 import { red } from "https://deno.land/std/fmt/colors.ts";
+
 export const RunCmd = async (cmd: CommandMetadata, command: object, options: object) => {
 
     CommandUtils.verifyRequiredOptions(cmd, options);
@@ -44,7 +45,7 @@ export const RunCmd = async (cmd: CommandMetadata, command: object, options: obj
     denoCmd.push("--config");
     denoCmd.push(tsConfig);
     denoCmd.push("--allow-net");
-    
+
     if(denoRunOptions.allowRead) denoCmd.push("--allow-read");
     if(denoRunOptions.allowWrite) denoCmd.push("--allow-write");
     if(denoRunOptions.allowRun) denoCmd.push("--allow-run");

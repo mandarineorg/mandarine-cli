@@ -1,7 +1,7 @@
-import { OptionsMetadata } from "../commands/options/optionsMetadata.ts";
-import { Args } from "https://deno.land/std/flags/mod.ts";
-import { CommandMetadata } from "../commands/commandMetadata.ts";
+// import { OptionsMetadata } from "../commands/types/type_options.ts";
+import { CommandMetadata } from "../commands/types/types_command.ts";
 import { bold } from "https://deno.land/std/fmt/colors.ts";
+// import { Args } from "https://deno.land/std/flags/mod.ts";
 
 export class CommandUtils {
     public static verifyRequiredOptions(cmd: CommandMetadata, contextOptions: object) {
@@ -16,7 +16,7 @@ export class CommandUtils {
 
             if(option.required && (!byFlag && !byAlias)) {
                 throw `Option --${option.flag} (-${option.alias}) is required
-                
+
                 ${cmd.usage}`;
             }
         });

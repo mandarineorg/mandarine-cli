@@ -1,9 +1,17 @@
 // @ts-nocheck
-import { CommandMetadata } from "../commands/commandMetadata.ts";
-import { CommandUtils } from "../utils/commandUtils.ts";
-import { controllerFile, serviceFile, componentFile, middlewareFile, repositoryFile, modelFile, configurationFile } from "../defaults/defaultFiles.ts";
-import { CommonUtils } from "../utils/commonUtils.ts";
+import {
+    controllerFile,
+    serviceFile,
+    componentFile,
+    middlewareFile,
+    repositoryFile,
+    modelFile,
+    configurationFile
+} from "../defaults/defaultFiles.ts";
 import { bold, green } from "https://deno.land/std/fmt/colors.ts";
+import { CommandMetadata } from "../commands/types/types_command.ts";
+import { CommandUtils } from "../utils/commandUtils.ts";
+import { CommonUtils } from "../utils/commonUtils.ts";
 const typeErrorMsg = `
 Please specify a type to generate:
 
@@ -110,6 +118,6 @@ export const GenerateCmd = (cmd: CommandMetadata, command: object, options: obje
         let writeableContent = encoder.encode(toGenerate.files[file]);
         Deno.writeFileSync(filePath, writeableContent);
     });
-    
+
     console.log(`Module created ${green('successfully')}`);
 }

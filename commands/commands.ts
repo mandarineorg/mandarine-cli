@@ -132,6 +132,16 @@ export class Commands {
           required: false,
         })
         .option({
+          flag: "allow-env",
+          description: "Specifies `deno` should use the flag --allow-env",
+          required: false,
+        })
+        .option({
+          flag: "allow-all",
+          description: "Specifies `deno` should use the flag --allow-all",
+          required: false,
+        })
+        .option({
           flag: "reload",
           description: "Specifies `deno` should use the flag --reload",
           required: false,

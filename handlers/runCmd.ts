@@ -30,6 +30,8 @@ export const RunCmd = async (
     allowWrite: false,
     allowRun: false,
     reload: false,
+    allowEnv: false,
+    allowAll: false,
   };
 
   if (options["allow-read"]) {
@@ -52,12 +54,22 @@ export const RunCmd = async (
     denoRunOptions.reload = true;
   }
 
+  if (options["allow-env"]) {
+    denoRunOptions.allowEnv = true;
+  }
+
+  if (options["allow-all"]) {
+    denoRunOptions.allowAll = true;
+  }
+
   let denoCmd: string[] = ["deno", "run", "--config", tsConfig, "--allow-net"];
 
   if (denoRunOptions.allowRead) denoCmd.push("--allow-read");
   if (denoRunOptions.allowWrite) denoCmd.push("--allow-write");
   if (denoRunOptions.allowRun) denoCmd.push("--allow-run");
   if (denoRunOptions.reload) denoCmd.push("--reload");
+  if (denoRunOptions.allowAll) denoCmd.push("--allow-all");
+  if (denoRunOptions.allowEnv) denoCmd.push("--allow-env");
 
   denoCmd.push(appFile);
 

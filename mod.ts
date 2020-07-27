@@ -1,7 +1,9 @@
+// Copyright 2020-2020 The Mandarine.TS Framework authors. All rights reserved. MIT license.
+
 import { parse } from "https://deno.land/std/flags/mod.ts";
 import { bold } from "https://deno.land/std/fmt/colors.ts";
 import { Commands } from "./commands/commands.ts";
-import { objectGen } from "./types/types.ts"
+import { objectGen } from "./types/types.ts";
 
 export async function Process(): Promise<void> {
   const { args } = Deno;
@@ -44,7 +46,6 @@ export async function Process(): Promise<void> {
   }
 
   if (!found) {
-
     console.log(`Found argument ${bold(
       (currentCommandName != undefined
         ? currentCommandName

@@ -5,11 +5,20 @@ The Mandarine CLI allows you to create Mandarine-powered application in seconds 
 ### Installing
 
 In order to install the latest version of Mandarine's CLI, you need to have installed Deno in your computer. Then, run from your terminal the following command:
-`deno install -f --allow-read --allow-write --allow-run -n mandarine https://deno.land/x/mandarinets/cli.ts`
+
+```sh
+deno install -f --allow-read --allow-write --allow-run -n mandarine https://deno.land/x/mandarinets/cli.ts`
+```
+
+or use [Trex](https://github.com/crewdevio/Trex) package manager.
+
+```sh
+trex getTool mandarineCli
+```
 
 # Usage
 
-Please [click here](https://mandarineframework.gitbook.io/mandarine-ts/mandarine-cli/cli) for documentation.
+Please [click here](https://www.mandarinets.org/docs/master/mandarine/cli-introduction) for documentation.
 
 # Want to help?
 

@@ -1,3 +1,5 @@
+// Copyright 2020-2020 The Mandarine.TS Framework authors. All rights reserved. MIT license.
+
 import { CommandMetadata, objectGen } from "../types/types.ts";
 import { CommandUtils } from "../utils/commandUtils.ts";
 import { MandarineProjectStructure } from "../deps.ts";
@@ -9,18 +11,15 @@ export const NewCmd = (
   command: objectGen,
   options: objectGen
 ) => {
-
   CommandUtils.verifyRequiredOptions(cmd, options);
 
   CommandUtils.verifyValidityOptions(cmd, options);
   let cwd = Deno.cwd();
   let force = false;
 
-
   if (options["directory"]) cwd = options["directory"];
 
   if (options["d"]) cwd = options["d"];
-
 
   if (options["force"] || options["f"]) force = true;
 

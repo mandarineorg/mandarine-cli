@@ -1,7 +1,8 @@
+// Copyright 2020-2020 The Mandarine.TS Framework authors. All rights reserved. MIT license.
+
 import { CommandMetadata, objectGen } from "../types/types.ts";
 import { CommandUtils } from "../utils/commandUtils.ts";
 import { red } from "../deps.ts";
-
 
 export const RunCmd = async (
   cmd: CommandMetadata,
@@ -11,7 +12,7 @@ export const RunCmd = async (
   CommandUtils.verifyRequiredOptions(cmd, options);
   CommandUtils.verifyValidityOptions(cmd, options);
 
-  let appFile = `${Deno.cwd()}/src/main/mandarine/app.ts`;
+  let appFile = `${Deno.cwd()}/src/mandarine/app.ts`;
   let tsConfig = `${Deno.cwd()}/tsconfig.json`;
 
   let entryPointOption = options["entry-point"];
@@ -62,7 +63,14 @@ export const RunCmd = async (
     denoRunOptions.allowAll = true;
   }
 
-  let denoCmd: string[] = ["deno", "run", "--config", tsConfig, "--allow-net"];
+  let denoCmd: string[] = [
+    "deno",
+    "run",
+    "--config",
+    tsConfig,
+    "--allow-net",
+    "--allow-env",
+  ];
 
   if (denoRunOptions.allowRead) denoCmd.push("--allow-read");
   if (denoRunOptions.allowWrite) denoCmd.push("--allow-write");

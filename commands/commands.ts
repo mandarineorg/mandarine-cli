@@ -1,4 +1,6 @@
-import { green, yellow } from "https://deno.land/std/fmt/colors.ts"
+// Copyright 2020-2020 The Mandarine.TS Framework authors. All rights reserved. MIT license.
+
+import { green, yellow } from "https://deno.land/std/fmt/colors.ts";
 import { GenerateCmd } from "../handlers/generateCmd.ts";
 import { CommandFactory } from "./commandFactory.ts";
 import { CommandMetadata } from "../types/types.ts";
@@ -151,12 +153,13 @@ export class Commands {
   }
 
   public getHelp() {
-
     const helpInfo = [
       green(`Mandarine CLI ${yellow(cliVersion)}\n`),
 
-      `\n${green('Docs:')} https://mandarineframework.gitbook.io/mandarine-ts/\n`,
-      `${green('Bugs:')} https://github.com/mandarineorg/mandarinets/issues\n`,
+      `\n${green(
+        "Docs:"
+      )} https://www.mandarinets.org/docs/mandarine/introduction\n`,
+      `${green("Bugs:")} https://github.com/mandarineorg/mandarinets/issues\n`,
 
       green("\nUSAGE:\n"),
       "   mandarine [OPTIONS] [SUBCOMAND]\n",
@@ -174,9 +177,7 @@ export class Commands {
     console.log(helpInfo);
 
     for (const { alias, command, description } of this.commands) {
-      console.log(
-        `${yellow(command)} (${alias})    ${description}.`
-      );
+      console.log(`${yellow(command)} (${alias})    ${description}.`);
     }
     console.log("\n");
   }

@@ -10,12 +10,6 @@ In order to install the latest version of Mandarine's CLI, you need to have inst
 deno install -f --allow-read --allow-write --allow-run -n mandarine https://deno.land/x/mandarinets/cli.ts`
 ```
 
-or use [Trex](https://github.com/crewdevio/Trex) package manager.
-
-```sh
-trex getTool mandarineCli
-```
-
 # Usage
 
 Please [click here](https://www.mandarinets.org/docs/master/mandarine/cli-introduction) for documentation.

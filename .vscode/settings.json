@@ -1,6 +1,5 @@
-// .vscode/settings.json
 {
-    "deno.enable": true,
-    "deno.autoFmtOnSave": true,
-    "deno.alwaysShowStatus": true
+  "deno.enable": true,
+  "deno.import_map": "./import_map.json",
+  "deno.unstable": true
 }

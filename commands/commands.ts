@@ -1,12 +1,14 @@
 // Copyright 2020-2020 The Mandarine.TS Framework authors. All rights reserved. MIT license.
 
-import { green, yellow } from "https://deno.land/std/fmt/colors.ts";
 import { GenerateCmd } from "../handlers/generateCmd.ts";
 import { CommandFactory } from "./commandFactory.ts";
 import { CommandMetadata } from "../types/types.ts";
 import { NewCmd } from "../handlers/newCmd.ts";
 import { RunCmd } from "../handlers/runCmd.ts";
 import { cliVersion } from "../version.ts";
+import { colors } from "../imports/fmt.ts";
+
+const { green, yellow } = colors;
 
 export class Commands {
   private commands: CommandMetadata[] = [];

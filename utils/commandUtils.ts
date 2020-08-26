@@ -1,7 +1,9 @@
 // Copyright 2020-2020 The Mandarine.TS Framework authors. All rights reserved. MIT license.
 
 import { CommandMetadata } from "../types/types.ts";
-import { bold } from "../deps.ts";
+import { colors } from "../imports/fmt.ts";
+
+const { bold } = colors;
 
 export class CommandUtils {
   public static verifyRequiredOptions(

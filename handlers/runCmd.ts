@@ -2,7 +2,9 @@
 
 import { CommandMetadata, objectGen } from "../types/types.ts";
 import { CommandUtils } from "../utils/commandUtils.ts";
-import { red } from "../deps.ts";
+import { colors } from "../imports/fmt.ts";
+
+const { red } = colors;
 
 export const RunCmd = async (
   cmd: CommandMetadata,
@@ -81,16 +83,37 @@ export const RunCmd = async (
 
   denoCmd.push(appFile);
 
-  let appStatus = await Deno.run({
-    cmd: denoCmd,
-  }).status();
+  // * reload project when files changes
+  const runApp = (): Deno.Process => {
+    return Deno.run({
+      cmd: denoCmd,
+    });
+  };
 
-  if (!appStatus.success) {
+  let task = runApp();
+
+  let throttle = 200;
+
+  let timeout: number | null = null;
+
+  for await (const event of Deno.watchFs(".")) {
+    if (event.kind !== "access") {
+      if (timeout) clearTimeout(timeout);
+
+      timeout = setTimeout(() => {
+        task && task.close();
+        console.clear();
+        task = runApp();
+      }, throttle);
+    }
+  }
+
+  if (!(await task.status()).success) {
     console.log(
       "Mandarine could not start the application. Make sure your working directory is the root of your application"
     );
     console.log(red("Exit"));
   } else {
-    console.log(appStatus);
+    console.log(task);
   }
 };

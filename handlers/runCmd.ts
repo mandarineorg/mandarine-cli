@@ -35,6 +35,7 @@ export const RunCmd = async (
     reload: false,
     allowEnv: false,
     allowAll: false,
+    watch: false,
   };
 
   if (options["allow-read"]) {
@@ -83,7 +84,6 @@ export const RunCmd = async (
 
   denoCmd.push(appFile);
 
-  // * reload project when files changes
   const runApp = (): Deno.Process => {
     return Deno.run({
       cmd: denoCmd,
@@ -92,20 +92,27 @@ export const RunCmd = async (
 
   let task = runApp();
 
-  let throttle = 200;
+  // * reload project when files changes
+  async function watch() {
+    let throttle = 200;
 
-  let timeout: number | null = null;
+    let timeout: number | null = null;
 
-  for await (const event of Deno.watchFs(".")) {
-    if (event.kind !== "access") {
-      if (timeout) clearTimeout(timeout);
+    for await (const event of Deno.watchFs(".")) {
+      if (event.kind !== "access") {
+        if (timeout) clearTimeout(timeout);
 
-      timeout = setTimeout(() => {
-        task && task.close();
-        console.clear();
-        task = runApp();
-      }, throttle);
+        timeout = setTimeout(() => {
+          task && task.close();
+          console.clear();
+          task = runApp();
+        }, throttle);
+      }
     }
+  }
+
+  if (options["watch"]) {
+    await watch();
   }
 
   if (!(await task.status()).success) {

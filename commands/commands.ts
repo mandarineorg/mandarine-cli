@@ -150,6 +150,12 @@ export class Commands {
           description: "Specifies `deno` should use the flag --reload",
           required: false,
         })
+        .option({
+          flag: "watch",
+          description:
+          "specifies to reload the project every time files change --watch",
+          required: false,
+        })
         .get()
     );
   }

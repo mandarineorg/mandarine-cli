@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "fmt": {
+      "url": "https://denopkg.com/crewdevio/Trex@proxy/proxy/files/fmt.ts",
+      "hash": "5b4388adfdc1f5ad8a727f95a91c3f255cb36f430b6b4503f8f3ddacc162db53"
+    },
+    "flags": {
+      "url": "https://deno.land/std@0.66.0/flags/mod.ts",
+      "hash": "4f0d7fa435649c93d95f07eda25d45c77915b3643b8b97c094f66f098b95844e"
+    }
+  }
+}

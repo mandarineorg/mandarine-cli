@@ -1,10 +1,12 @@
 // Copyright 2020-2020 The Mandarine.TS Framework authors. All rights reserved. MIT license.
 
-import { defaultFiles } from "../defaults/defaultFiles.ts";
-import { bold, green } from "../deps.ts";
 import { CommandMetadata, objectGen } from "../types/types.ts";
+import { defaultFiles } from "../defaults/defaultFiles.ts";
 import { CommandUtils } from "../utils/commandUtils.ts";
 import { CommonUtils } from "../utils/commonUtils.ts";
+import { colors } from "../imports/fmt.ts";
+
+const { bold, green } = colors;
 
 const typeErrorMsg = `
 Please specify a type to generate:

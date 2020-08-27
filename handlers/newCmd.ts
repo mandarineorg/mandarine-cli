@@ -4,7 +4,9 @@ import { CommandMetadata, objectGen } from "../types/types.ts";
 import { CommandUtils } from "../utils/commandUtils.ts";
 import { MandarineProjectStructure } from "../deps.ts";
 import { CommonUtils } from "../utils/commonUtils.ts";
-import { green, bold } from "../deps.ts";
+import { colors } from "../imports/fmt.ts";
+
+const { green, bold } = colors;
 
 export const NewCmd = (
   cmd: CommandMetadata,

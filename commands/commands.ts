@@ -1,10 +1,14 @@
-import { green, yellow } from "https://deno.land/std/fmt/colors.ts"
+// Copyright 2020-2020 The Mandarine.TS Framework authors. All rights reserved. MIT license.
+
 import { GenerateCmd } from "../handlers/generateCmd.ts";
 import { CommandFactory } from "./commandFactory.ts";
 import { CommandMetadata } from "../types/types.ts";
 import { NewCmd } from "../handlers/newCmd.ts";
 import { RunCmd } from "../handlers/runCmd.ts";
 import { cliVersion } from "../version.ts";
+import { colors } from "../imports/fmt.ts";
+
+const { green, yellow } = colors;
 
 export class Commands {
   private commands: CommandMetadata[] = [];
@@ -146,17 +150,24 @@ export class Commands {
           description: "Specifies `deno` should use the flag --reload",
           required: false,
         })
+        .option({
+          flag: "watch",
+          description:
+          "specifies to reload the project every time files change --watch",
+          required: false,
+        })
         .get()
     );
   }
 
   public getHelp() {
-
     const helpInfo = [
       green(`Mandarine CLI ${yellow(cliVersion)}\n`),
 
-      `\n${green('Docs:')} https://mandarineframework.gitbook.io/mandarine-ts/\n`,
-      `${green('Bugs:')} https://github.com/mandarineorg/mandarinets/issues\n`,
+      `\n${green(
+        "Docs:"
+      )} https://www.mandarinets.org/docs/mandarine/introduction\n`,
+      `${green("Bugs:")} https://github.com/mandarineorg/mandarinets/issues\n`,
 
       green("\nUSAGE:\n"),
       "   mandarine [OPTIONS] [SUBCOMAND]\n",
@@ -174,9 +185,7 @@ export class Commands {
     console.log(helpInfo);
 
     for (const { alias, command, description } of this.commands) {
-      console.log(
-        `${yellow(command)} (${alias})    ${description}.`
-      );
+      console.log(`${yellow(command)} (${alias})    ${description}.`);
     }
     console.log("\n");
   }

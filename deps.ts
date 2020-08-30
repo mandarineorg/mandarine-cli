@@ -1,3 +1,3 @@
-export { structure as MandarineProjectStructure } from "https://deno.land/x/mandarinets/mandarine-project-structure.ts";
+// Copyright 2020-2020 The Mandarine.TS Framework authors. All rights reserved. MIT license.
 
-export { red, yellow, green, bold } from "https://deno.land/std/fmt/colors.ts";
+export { structure as MandarineProjectStructure } from "./utils/structure.ts";

@@ -1,16 +1,12 @@
-import {
-  controllerFile,
-  serviceFile,
-  componentFile,
-  middlewareFile,
-  repositoryFile,
-  modelFile,
-  configurationFile,
-} from "../defaults/defaultFiles.ts";
-import { bold, green } from "../deps.ts";
+// Copyright 2020-2020 The Mandarine.TS Framework authors. All rights reserved. MIT license.
+
 import { CommandMetadata, objectGen } from "../types/types.ts";
+import { defaultFiles } from "../defaults/defaultFiles.ts";
 import { CommandUtils } from "../utils/commandUtils.ts";
 import { CommonUtils } from "../utils/commonUtils.ts";
+import { colors } from "../imports/fmt.ts";
+
+const { bold, green } = colors;
 
 const typeErrorMsg = `
 Please specify a type to generate:
@@ -57,8 +53,8 @@ export const GenerateCmd = (
     return;
   }
 
-  let moduleFolder = `/src/main/mandarine/${moduleName}`;
-  let toGenerate: { folders: string[], files: objectGen } = {
+  let moduleFolder = `/src/mandarine/${moduleName}`;
+  let toGenerate: { folders: string[]; files: objectGen } = {
     folders: [moduleFolder],
     files: {},
   };
@@ -73,25 +69,23 @@ export const GenerateCmd = (
         componentName = `${moduleName}Controller`;
         toGenerate.files[
           `${moduleName}.controller.ts`
-        ] = controllerFile.replace("%controllerName%", componentName);
+        ] = defaultFiles.controller.replace("%controllerName%", componentName);
         break;
 
       case "service":
 
       case "s":
         componentName = `${moduleName}Service`;
-        toGenerate.files[`${moduleName}.service.ts`] = serviceFile.replace(
-          "%serviceName%",
-          componentName
-        );
+        toGenerate.files[
+          `${moduleName}.service.ts`
+        ] = defaultFiles.service.replace("%serviceName%", componentName);
         break;
 
       case "component":
         componentName = `${moduleName}Component`;
-        toGenerate.files[`${moduleName}.component.ts`] = componentFile.replace(
-          "%componentName%",
-          componentName
-        );
+        toGenerate.files[
+          `${moduleName}.component.ts`
+        ] = defaultFiles.component.replace("%componentName%", componentName);
         break;
       case "middleware":
 
@@ -99,7 +93,7 @@ export const GenerateCmd = (
         componentName = `${moduleName}Middleware`;
         toGenerate.files[
           `${moduleName}.middleware.ts`
-        ] = middlewareFile.replace("%middlewareName%", componentName);
+        ] = defaultFiles.middleware.replace("%middlewareName%", componentName);
         break;
       case "repository":
 
@@ -107,12 +101,12 @@ export const GenerateCmd = (
         componentName = `${moduleName}Repository`;
         toGenerate.files[
           `${moduleName}.repository.ts`
-        ] = repositoryFile.replace("%repositoryName%", componentName);
+        ] = defaultFiles.repository.replace("%repositoryName%", componentName);
         break;
 
       case "model":
         componentName = `${moduleName}Model`;
-        toGenerate.files[`${moduleName}.model.ts`] = modelFile
+        toGenerate.files[`${moduleName}.model.ts`] = defaultFiles.model
           .replace("%modelName%", componentName)
           .replace("%modelTableName%", moduleName);
         break;
@@ -121,7 +115,10 @@ export const GenerateCmd = (
         componentName = `${moduleName}Configuration`;
         toGenerate.files[
           `${moduleName}.configuration.ts`
-        ] = configurationFile.replace("%configurationName%", componentName);
+        ] = defaultFiles.configuration.replace(
+          "%configurationName%",
+          componentName
+        );
         break;
     }
   });

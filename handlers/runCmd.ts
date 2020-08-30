@@ -1,7 +1,10 @@
+// Copyright 2020-2020 The Mandarine.TS Framework authors. All rights reserved. MIT license.
+
 import { CommandMetadata, objectGen } from "../types/types.ts";
 import { CommandUtils } from "../utils/commandUtils.ts";
-import { red } from "../deps.ts";
+import { colors } from "../imports/fmt.ts";
 
+const { red } = colors;
 
 export const RunCmd = async (
   cmd: CommandMetadata,
@@ -11,7 +14,7 @@ export const RunCmd = async (
   CommandUtils.verifyRequiredOptions(cmd, options);
   CommandUtils.verifyValidityOptions(cmd, options);
 
-  let appFile = `${Deno.cwd()}/src/main/mandarine/app.ts`;
+  let appFile = `${Deno.cwd()}/src/mandarine/app.ts`;
   let tsConfig = `${Deno.cwd()}/tsconfig.json`;
 
   let entryPointOption = options["entry-point"];
@@ -32,6 +35,7 @@ export const RunCmd = async (
     reload: false,
     allowEnv: false,
     allowAll: false,
+    watch: false,
   };
 
   if (options["allow-read"]) {
@@ -62,7 +66,14 @@ export const RunCmd = async (
     denoRunOptions.allowAll = true;
   }
 
-  let denoCmd: string[] = ["deno", "run", "--config", tsConfig, "--allow-net"];
+  let denoCmd: string[] = [
+    "deno",
+    "run",
+    "--config",
+    tsConfig,
+    "--allow-net",
+    "--allow-env",
+  ];
 
   if (denoRunOptions.allowRead) denoCmd.push("--allow-read");
   if (denoRunOptions.allowWrite) denoCmd.push("--allow-write");
@@ -73,16 +84,43 @@ export const RunCmd = async (
 
   denoCmd.push(appFile);
 
-  let appStatus = await Deno.run({
-    cmd: denoCmd,
-  }).status();
+  const runApp = (): Deno.Process => {
+    return Deno.run({
+      cmd: denoCmd,
+    });
+  };
 
-  if (!appStatus.success) {
+  let task = runApp();
+
+  // * reload project when files changes
+  async function watch() {
+    let throttle = 200;
+
+    let timeout: number | null = null;
+
+    for await (const event of Deno.watchFs(".")) {
+      if (event.kind !== "access") {
+        if (timeout) clearTimeout(timeout);
+
+        timeout = setTimeout(() => {
+          task && task.close();
+          console.clear();
+          task = runApp();
+        }, throttle);
+      }
+    }
+  }
+
+  if (options["watch"]) {
+    await watch();
+  }
+
+  if (!(await task.status()).success) {
     console.log(
       "Mandarine could not start the application. Make sure your working directory is the root of your application"
     );
     console.log(red("Exit"));
   } else {
-    console.log(appStatus);
+    console.log(task);
   }
 };
